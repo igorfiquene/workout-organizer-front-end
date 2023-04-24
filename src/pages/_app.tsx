@@ -1,17 +1,17 @@
-import { ThemeCurrentContext } from '@/contexts/ThemeCurrentContext'
-import GlobalStyle from '@/styles/globalStyle'
+import Layout from '@/components/Layout/layout'
+import { MantineProvider } from '@mantine/core'
 import { AppProps } from 'next/app'
-import { Inter } from 'next/font/google'
-
-const fontInter = Inter({ subsets: ['latin'] })
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={fontInter.className}>
-      <ThemeCurrentContext>
-        <GlobalStyle />
+    <MantineProvider
+      theme={{ colorScheme: 'dark' }}
+      withNormalizeCSS
+      withGlobalStyles
+    >
+      <Layout>
         <Component {...pageProps} />
-      </ThemeCurrentContext>
-    </main>
+      </Layout>
+    </MantineProvider>
   )
 }

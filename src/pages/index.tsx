@@ -1,3 +1,5 @@
+import { Title } from '@mantine/core'
+
 export default function Home() {
-  return <h1>Hello Worlddd</h1>
+  return <Title order={1}>Painel</Title>
 }
