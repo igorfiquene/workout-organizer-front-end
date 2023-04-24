@@ -11,4 +11,9 @@
   - Quantidade de série
   - Quantidade de repetição
   - Peso de cada exercício
+
+## Página de histórico
+
+- Retornar os treinos dos últimos 7 dias, com possibilidade de evoluir
+- Filtrar por data, categoria e treino
   

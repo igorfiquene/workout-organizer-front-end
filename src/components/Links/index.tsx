@@ -5,6 +5,7 @@ import {
   IconDashboard
 } from '@tabler/icons-react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const links = [
   {
@@ -28,19 +29,23 @@ const links = [
 ]
 
 export function Links() {
+  const router = useRouter()
+
   return (
     <>
-      {links.map((link) => (
+      {links.map(({ href, color, icon, label }) => (
         <UnstyledButton
           component={Link}
-          href={link.href}
-          key={link.href}
+          href={href}
+          key={href}
           sx={(theme) => ({
             display: 'block',
             width: '100%',
             padding: theme.spacing.xs,
             borderRadius: theme.radius.sm,
             color: theme.colors.dark[0],
+            backgroundColor:
+              router.pathname === href ? theme.colors.dark[6] : '',
 
             '&:hover': {
               backgroundColor: theme.colors.dark[6]
@@ -48,11 +53,11 @@ export function Links() {
           })}
         >
           <Group>
-            <ThemeIcon color={link.color} variant="light">
-              {link.icon}
+            <ThemeIcon color={color} variant="light">
+              {icon}
             </ThemeIcon>
 
-            <Text size="sm">{link.label}</Text>
+            <Text size="sm">{label}</Text>
           </Group>
         </UnstyledButton>
       ))}
