@@ -1,17 +1,4 @@
-<<<<<<< HEAD
-import { Space, Title } from '@mantine/core'
-import Calendar_Card from '../../components/Calendar'
-=======
-import {
-  Chip,
-  Flex,
-  Group,
-  MultiSelect,
-  Select,
-  SimpleGrid,
-  Space,
-  Title
-} from '@mantine/core'
+import { Chip, Flex, Group, MultiSelect, Select, SimpleGrid, Space, Title } from '@mantine/core'
 import { DatePicker } from '@mantine/dates'
 import { useForm } from '@mantine/form'
 import { useMemo, useState } from 'react'
@@ -77,7 +64,6 @@ interface FormValues {
     label: string
   }[]
 }
->>>>>>> c1f2d28c9954be50beaea1a181e8e18178581c4f
 
 export default function TraineePage() {
   const [date, setDate] = useState<Date | null>(null)
@@ -112,10 +98,7 @@ export default function TraineePage() {
   return (
     <>
       <Title order={1}>Treinos</Title>
-<<<<<<< HEAD
       <Space h="md" />
-      <Calendar_Card />
-=======
 
       <Space h={'xl'} />
 
@@ -199,7 +182,6 @@ export default function TraineePage() {
           />
         </Flex>
       </SimpleGrid>
->>>>>>> c1f2d28c9954be50beaea1a181e8e18178581c4f
     </>
   )
 }
