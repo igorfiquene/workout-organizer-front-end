@@ -1,4 +1,13 @@
-import { Chip, Flex, Group, MultiSelect, Select, SimpleGrid, Space, Title } from '@mantine/core'
+import {
+  Chip,
+  Flex,
+  Group,
+  MultiSelect,
+  Select,
+  SimpleGrid,
+  Space,
+  Title
+} from '@mantine/core'
 import { DatePicker } from '@mantine/dates'
 import { useForm } from '@mantine/form'
 import { useMemo, useState } from 'react'
@@ -16,6 +25,10 @@ const mock = {
     {
       id: 3,
       label: 'C'
+    },
+    {
+      id: 4,
+      label: 'D'
     }
   ],
   treino: {
@@ -23,13 +36,13 @@ const mock = {
       exercicios: [
         {
           id: 123481283,
-          slug: 'elevacao-lateral',
-          label: 'Elevação lateral'
+          slug: 'supino-reto',
+          label: 'Supino Reto'
         },
         {
           id: 192489284,
-          slug: 'evolucao',
-          label: 'Evolução'
+          slug: 'crucifixo',
+          label: 'Crucifixo'
         }
       ]
     },
@@ -37,27 +50,49 @@ const mock = {
       exercicios: [
         {
           id: 12311233,
-          slug: 'rosca-direta',
-          label: 'Rosca Direta'
+          slug: 'puxada-frontal',
+          label: 'Puxada Frontal'
         },
         {
           id: 12432423,
-          slug: 'triceps-corda',
-          label: 'Tríceps Corda'
+          slug: 'remada-com-halter',
+          label: 'Remada com Halter'
+        }
+      ]
+    },
+    perna: {
+      exercicios: [
+        {
+          id: 1232311233,
+          slug: 'agachamento-livre',
+          label: 'Agachamento Livre'
+        },
+        {
+          id: 1243422423,
+          slug: 'stiff',
+          label: 'Stiff'
         }
       ]
     },
     ombro: {
       exercicios: [
-        { id: 123981399, slug: 'puxada-frontal', label: 'Puxada Frontal' },
-        { id: 92838293238, slug: 'remada', label: 'Remada' }
+        {
+          id: 123981399,
+          slug: 'elevacao-lateral',
+          label: 'Elevação lateral'
+        },
+        {
+          id: 92838293238,
+          slug: 'desenvolvimento-com-halter',
+          label: 'Desenvolvimento com halter'
+        }
       ]
     }
   }
 }
 
 interface FormValues {
-  treino: 'peito' | 'costa' | 'ombro' | null
+  treino: 'peito' | 'costa' | 'ombro' | 'perna' | null
   exercicios: {
     id: number
     slug: string
@@ -164,6 +199,7 @@ export default function TraineePage() {
             data={[
               { value: 'peito', label: 'Peito' },
               { value: 'costa', label: 'Costa' },
+              { value: 'perna', label: 'Perna' },
               { value: 'ombro', label: 'Ombro' }
             ]}
             {...form.getInputProps('treino')}
