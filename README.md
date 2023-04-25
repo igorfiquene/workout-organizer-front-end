@@ -1,6 +1,6 @@
-# Starter Next.js project with docker
+# Workout Organizer
 
-A starter Next.js with Docker (dev and prod containers), Jest, Typescript, Styled Components, ESLINT.
+Aplicação para organizar os treinos, consiste em colocar sua divisão de treinos, exercicios, quantidade de series e repetições e peso.
 
 ## Development environment
 
