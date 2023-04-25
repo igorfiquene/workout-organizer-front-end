@@ -1,14 +1,4 @@
-import {
-  AppShell,
-  Burger,
-  Container,
-  Header,
-  MediaQuery,
-  Navbar,
-  Title,
-  useMantineTheme
-} from '@mantine/core'
-import { useState } from 'react'
+import { AppShell, Container, Navbar, useMantineTheme } from '@mantine/core'
 import { Links } from '../Links'
 
 import { Hind_Vadodara, Martel_Sans } from 'next/font/google'
@@ -27,7 +17,6 @@ const martel_sans = Martel_Sans({
 
 export default function Layout({ children }: { children: JSX.Element }) {
   const theme = useMantineTheme()
-  const [opened, setOpened] = useState(false)
 
   return (
     <main
@@ -42,33 +31,9 @@ export default function Layout({ children }: { children: JSX.Element }) {
         navbarOffsetBreakpoint="sm"
         asideOffsetBreakpoint="sm"
         navbar={
-          <Navbar
-            p="md"
-            hiddenBreakpoint="sm"
-            hidden={!opened}
-            width={{ sm: 200, lg: 300 }}
-          >
+          <Navbar p="md" hiddenBreakpoint="sm" width={{ sm: 160, lg: 200 }}>
             <Links />
           </Navbar>
-        }
-        header={
-          <Header height={{ base: 50, md: 70 }} p="md">
-            <div
-              style={{ display: 'flex', alignItems: 'center', height: '100%' }}
-            >
-              <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-                <Burger
-                  opened={opened}
-                  onClick={() => setOpened((o) => !o)}
-                  size="sm"
-                  color={theme.colors.gray[6]}
-                  mr="xl"
-                />
-              </MediaQuery>
-
-              <Title order={3}>Workout Organizer</Title>
-            </div>
-          </Header>
         }
       >
         <Container size="lg">{children}</Container>
