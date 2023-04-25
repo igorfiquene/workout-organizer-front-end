@@ -10,7 +10,7 @@ import {
 } from '@mantine/core'
 import { DatePicker } from '@mantine/dates'
 import { useForm } from '@mantine/form'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 const mock = {
   divisao: [
@@ -65,22 +65,44 @@ const mock = {
   }
 }
 
+interface FormValues {
+  treino: 'peito' | 'costa' | 'ombro' | null
+  exercicios: {
+    id: number
+    slug: string
+    label: string
+  }[]
+}
+
 export default function TraineePage() {
   const [date, setDate] = useState<Date | null>(null)
 
-  const form = useForm({
+  const form = useForm<FormValues>({
     initialValues: {
-      treino: '',
-      exercicios: ['']
+      treino: null,
+      exercicios: []
     }
   })
 
-  const getValueBasedTreinoValue = form.values.treino
-    ? mock.treino[form.values.treino]?.exercicios?.map(({ slug, label }) => ({
+  const getValueBasedTreinoValue = useMemo(() => {
+    if (!form.values.treino) {
+      return []
+    }
+
+    // reset value of exercicios when treino input was changed
+    form.setValues({
+      exercicios: []
+    })
+
+    return mock.treino[form.values.treino].exercicios.map(
+      ({ slug, label }) => ({
         value: slug,
         label
-      }))
-    : []
+      })
+    )
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.values.treino])
 
   return (
     <>
@@ -147,12 +169,12 @@ export default function TraineePage() {
               label: { marginBottom: theme.spacing.xs }
             })}
             placeholder="Selecione o tipo de treino"
-            onChange={(value) => value && form.setFieldValue('treino', value)}
             data={[
               { value: 'peito', label: 'Peito' },
               { value: 'costa', label: 'Costa' },
               { value: 'ombro', label: 'Ombro' }
             ]}
+            {...form.getInputProps('treino')}
           />
 
           <MultiSelect
@@ -162,10 +184,9 @@ export default function TraineePage() {
             label="Selecione o tipo de exercício"
             placeholder="Selecione o tipo de exercício"
             disabled={!form.values.treino}
-            onChange={(value) =>
-              value && form.setFieldValue('exercicios', [...value])
-            }
+            clearable
             data={getValueBasedTreinoValue}
+            {...form.getInputProps('exercicios')}
           />
         </Flex>
       </SimpleGrid>
